@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+</head>
+<body>
+    <h1>To-Do List for {{ current_user.username }}</h1>
+    <form method="POST" action="/add">
+        <input type="text" name="content">
+        <input type="submit" value="Add Task">
+    </form>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {{ task.content }} - 
+            {% if task.complete %}✔️{% else %}❌{% endif %}
+            <a href="/complete/{{ task.id }}">Toggle</a>
+            <a href="/delete/{{ task.id }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/logout">Logout</a>
+</body>
+</html>
